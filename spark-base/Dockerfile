@@ -1,4 +1,5 @@
 FROM elek/bigdata-base:8
+RUN apk add --update python && rm -rf /var/cache/apk/*
 ENV CONF_DIR /opt/spark/conf
 ENV HADOOP_CONF_DIR /opt/spark/conf
 ADD url ./

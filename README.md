@@ -42,4 +42,4 @@ docker run elek/spark-base:latest /opt/spark/bin/run-example SparkPi 10 10
 
 ## TODO
 
-R and python interfaces are not yet supported (at least in this images)
+R interface is not yet supported (at least in this images)
