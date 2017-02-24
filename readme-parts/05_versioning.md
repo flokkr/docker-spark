@@ -1,7 +1,9 @@
 
 ## Versioning policy
 
-  The latest tag points to the latest configuration loading and the latest stable apache version.
+  The _latest_ tag points to the latest configuration loading and the latest stable apache version.
+
+  The _testing_ usually points to a cutting edge developer snapshot or RC/alpha release but expected to be working. 
 
   If there is plain version tag without prefix it is synchronized with the version of the original apache software.
 
