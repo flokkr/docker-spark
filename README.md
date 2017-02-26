@@ -115,7 +115,7 @@ Using the image depends from the configuration loading and the exact use case. Y
 ### Smoketest
 
 ```
-docker run elek/spark-base:latest /opt/spark/bin/run-example SparkPi 10 10
+docker run elek/spark-base:2.0.2 /opt/spark/bin/run-example SparkPi 10 10
 ```
 
 
