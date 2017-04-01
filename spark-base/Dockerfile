@@ -1,4 +1,4 @@
-FROM elek/bigdata-base:13
+FROM elek/bigdata-base:14
 ENV CONF_DIR /opt/spark/conf
 ENV HADOOP_CONF_DIR /opt/spark/conf
 ADD url ./
