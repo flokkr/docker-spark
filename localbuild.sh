@@ -1,6 +1,7 @@
-#!/bin/bash
-DOCKER_TAG=${DOCKER_TAG:-latest}
-docker build -t elek/spark-base:$DOCKER_TAG spark-base
-docker build -t elek/spark-history:$DOCKER_TAG spark-history
-docker build -t elek/spark-master:$DOCKER_TAG spark-master
-docker build -t elek/spark-slave:$DOCKER_TAG spark-slave
+set -e
+DOCKER_TAG=${1:-latest}
+docker build -t elek/hadoop:$DOCKER_TAG hadoop
+docker build -t elek/hadoop-hdfs-datanode:$DOCKER_TAG hdfs-datanode
+docker build -t elek/hadoop-hdfs-namenode:$DOCKER_TAG hdfs-namenode
+docker build -t elek/hadoop-yarn-nodemanager:$DOCKER_TAG yarn-nodemanager
+docker build -t elek/hadoop-yarn-resourcemanager:$DOCKER_TAG yarn-resourcemanager
