@@ -2,7 +2,11 @@
 set -ex
 git reset --hard
 git clean -f
-git checkout -b $1
+if [ -f .git/refs/remotes/origin/$1 ]; then
+   git checkout -b $1 origin/$1
+else 
+   git checkout -b $1
+fi
 git reset --hard master
 git reset HEAD@{1}
 BASE_IMAGE=$(basename $(dirname $(find -name baseimage)))
