@@ -1,4 +1,4 @@
-FROM elek/bigdata-base:16
+FROM flokkr/base:17
 ENV CONF_DIR /opt/spark/conf
 ENV HADOOP_CONF_DIR /opt/spark/conf
 ADD url ./
