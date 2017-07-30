@@ -18,3 +18,4 @@ deploy:
 	docker push flokkr/spark-slave:$(VERSION)
 
 .PHONY: deploy build
+
