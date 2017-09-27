@@ -2,6 +2,7 @@ sudo: required
 
 env:
   - VERSION=latest
+  - VERSION=2.1.1 URL=http://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz
   - VERSION=2.2.0 URL=http://d3kbcqa49mib13.cloudfront.net/spark-2.2.0-bin-hadoop2.7.tgz
   - VERSION=2.1.1 URL=http://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz
   - VERSION=2.1.0 URL=http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.7.tgz
