@@ -1,4 +1,4 @@
-FROM flokkr/base:21
+FROM flokkr/base:26
 ENV CONF_DIR /opt/spark/conf
 ENV HADOOP_CONF_DIR /opt/spark/conf
 ADD url ./
