@@ -9,5 +9,6 @@ RUN wget $URL -O spark.tar.gz && tar zxf spark.tar.gz && rm spark.tar.gz && mv s
 WORKDIR /opt/spark
 USER root
 ADD sparkhadoop.sh /opt/launcher/plugins/030_sparkhadoop/sparkhadoop.sh
+ADD runner.sh /opt/spark/runner.sh
 USER hadoop
 ENV PATH $PATH:/opt/spark/bin
