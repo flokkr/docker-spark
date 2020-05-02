@@ -1,0 +1,8 @@
+name: spark
+basetag: 34
+urlpath: spark/spark-%s/spark-%s-bin-without-hadoop.tgz
+containers:
+   - flokkr/spark
+git: https://github.com/flokkr/docker-spark
+versions:
+  - 2.4.5

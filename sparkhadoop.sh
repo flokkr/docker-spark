@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-export SPARK_DIST_CLASSPATH=$(hadoop classpath)
+if [ -f "/opt/hadoop/bin/hadoop" ]; then
+  export SPARK_DIST_CLASSPATH=$(hadoop classpath)
+fi
 
 call-next-plugin "$@"

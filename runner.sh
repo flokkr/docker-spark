@@ -4,5 +4,4 @@ if [ -f "/opt/hadoop/bin/oz" ]; then
 fi
 if [ -f "/opt/hadoop/bin/hadoop" ]; then
    export SPARK_DIST_CLASSPATH=$(/opt/hadoop/bin/hadoop classpath)
-fi
 $@
