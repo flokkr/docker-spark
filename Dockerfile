@@ -10,5 +10,5 @@ ADD sparkhadoop.sh /opt/launcher/plugins/030_sparkhadoop/sparkhadoop.sh
 RUN useradd --uid 1000 spark --gid 1000 -G flokkr --home /opt/hadoop && chown spark /opt
 USER spark
 ADD --chown=spark:flokkr ${ARTIFACTDIR} /opt/spark
-
+RUN chown spark:flokkr /opt/spark
 ENV PATH $PATH:/opt/spark/bin

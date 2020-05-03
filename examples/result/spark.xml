@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.6.8 on linux)" generated="20200503 15:17:14.260" rpa="false">
+<suite id="s1" name="Spark" source="/opt/smoketest/spark.robot">
+<test id="s1-t1" name="Run Sample Pi job">
+<kw name="Execute">
+<arguments>
+<arg>/opt/hadoop/bin/hadoop classpath</arg>
+</arguments>
+<assign>
+<var>${classpath}</var>
+</assign>
+<kw name="Run And Return Rc And Output" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the RC and output.</doc>
+<arguments>
+<arg>${command}</arg>
+</arguments>
+<assign>
+<var>${rc}</var>
+<var>${output}</var>
+</assign>
+<msg timestamp="20200503 15:17:14.296" level="INFO">Running command '/opt/hadoop/bin/hadoop classpath 2&gt;&amp;1'.</msg>
+<msg timestamp="20200503 15:17:14.341" level="INFO">${rc} = 0</msg>
+<msg timestamp="20200503 15:17:14.341" level="INFO">${output} = WARNING: log4j.properties is not found. HADOOP_CONF_DIR may be incomplete.
+/opt/spark/conf:/opt/hadoop/share/hadoop/common/lib/*:/opt/hadoop/share/hadoop/common/*:/opt/hadoop/share/hadoop/hdfs:/opt/ha...</msg>
+<status status="PASS" starttime="20200503 15:17:14.293" endtime="20200503 15:17:14.341"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<msg timestamp="20200503 15:17:14.341" level="INFO">WARNING: log4j.properties is not found. HADOOP_CONF_DIR may be incomplete.
+/opt/spark/conf:/opt/hadoop/share/hadoop/common/lib/*:/opt/hadoop/share/hadoop/common/*:/opt/hadoop/share/hadoop/hdfs:/opt/hadoop/share/hadoop/hdfs/lib/*:/opt/hadoop/share/hadoop/hdfs/*:/opt/hadoop/share/hadoop/mapreduce/lib/*:/opt/hadoop/share/hadoop/mapreduce/*:/opt/hadoop/share/hadoop/yarn:/opt/hadoop/share/hadoop/yarn/lib/*:/opt/hadoop/share/hadoop/yarn/*</msg>
+<status status="PASS" starttime="20200503 15:17:14.341" endtime="20200503 15:17:14.342"></status>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<arguments>
+<arg>${rc}</arg>
+<arg>0</arg>
+</arguments>
+<msg timestamp="20200503 15:17:14.342" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200503 15:17:14.342" endtime="20200503 15:17:14.342"></status>
+</kw>
+<msg timestamp="20200503 15:17:14.342" level="INFO">${classpath} = WARNING: log4j.properties is not found. HADOOP_CONF_DIR may be incomplete.
+/opt/spark/conf:/opt/hadoop/share/hadoop/common/lib/*:/opt/hadoop/share/hadoop/common/*:/opt/hadoop/share/hadoop/hdfs:/opt/ha...</msg>
+<status status="PASS" starttime="20200503 15:17:14.293" endtime="20200503 15:17:14.342"></status>
+</kw>
+<kw name="Set Environment Variable" library="OperatingSystem">
+<doc>Sets an environment variable to a specified value.</doc>
+<arguments>
+<arg>SPARK_DIST_CLASSPATH</arg>
+<arg>${classpath}</arg>
+</arguments>
+<msg timestamp="20200503 15:17:14.343" level="INFO">Environment variable 'SPARK_DIST_CLASSPATH' set to value 'WARNING: log4j.properties is not found. HADOOP_CONF_DIR may be incomplete.
+/opt/spark/conf:/opt/hadoop/share/hadoop/common/lib/*:/opt/hadoop/share/hadoop/common/*:/opt/hadoop/share/hadoop/hdfs:/opt/hadoop/share/hadoop/hdfs/lib/*:/opt/hadoop/share/hadoop/hdfs/*:/opt/hadoop/share/hadoop/mapreduce/lib/*:/opt/hadoop/share/hadoop/mapreduce/*:/opt/hadoop/share/hadoop/yarn:/opt/hadoop/share/hadoop/yarn/lib/*:/opt/hadoop/share/hadoop/yarn/*'.</msg>
+<status status="PASS" starttime="20200503 15:17:14.342" endtime="20200503 15:17:14.343"></status>
+</kw>
+<kw name="Execute">
+<arguments>
+<arg>/opt/spark/bin/run-example org.apache.spark.examples.JavaSparkPi 10</arg>
+</arguments>
+<assign>
+<var>${output}</var>
+</assign>
+<kw name="Run And Return Rc And Output" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the RC and output.</doc>
+<arguments>
+<arg>${command}</arg>
+</arguments>
+<assign>
+<var>${rc}</var>
+<var>${output}</var>
+</assign>
+<msg timestamp="20200503 15:17:14.344" level="INFO">Running command '/opt/spark/bin/run-example org.apache.spark.examples.JavaSparkPi 10 2&gt;&amp;1'.</msg>
+<msg timestamp="20200503 15:17:17.962" level="INFO">${rc} = 0</msg>
+<msg timestamp="20200503 15:17:17.962" level="INFO">${output} = 2020-05-03 15:17:15,265 WARN  [main] util.NativeCodeLoader (NativeCodeLoader.java:&lt;clinit&gt;(60)) - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+...</msg>
+<status status="PASS" starttime="20200503 15:17:14.343" endtime="20200503 15:17:17.962"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<msg timestamp="20200503 15:17:17.963" level="INFO">2020-05-03 15:17:15,265 WARN  [main] util.NativeCodeLoader (NativeCodeLoader.java:&lt;clinit&gt;(60)) - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2020-05-03 15:17:15,503 INFO  [main] spark.SparkContext (Logging.scala:logInfo(54)) - Running Spark version 2.4.5
+2020-05-03 15:17:15,518 INFO  [main] spark.SparkContext (Logging.scala:logInfo(54)) - Submitted application: JavaSparkPi
+2020-05-03 15:17:15,550 INFO  [main] spark.SecurityManager (Logging.scala:logInfo(54)) - Changing view acls to: spark
+2020-05-03 15:17:15,550 INFO  [main] spark.SecurityManager (Logging.scala:logInfo(54)) - Changing modify acls to: spark
+2020-05-03 15:17:15,550 INFO  [main] spark.SecurityManager (Logging.scala:logInfo(54)) - Changing view acls groups to: 
+2020-05-03 15:17:15,551 INFO  [main] spark.SecurityManager (Logging.scala:logInfo(54)) - Changing modify acls groups to: 
+2020-05-03 15:17:15,551 INFO  [main] spark.SecurityManager (Logging.scala:logInfo(54)) - SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(spark); groups with view permissions: Set(); users  with modify permissions: Set(spark); groups with modify permissions: Set()
+2020-05-03 15:17:15,703 INFO  [main] util.Utils (Logging.scala:logInfo(54)) - Successfully started service 'sparkDriver' on port 45663.
+2020-05-03 15:17:15,719 INFO  [main] spark.SparkEnv (Logging.scala:logInfo(54)) - Registering MapOutputTracker
+2020-05-03 15:17:15,730 INFO  [main] spark.SparkEnv (Logging.scala:logInfo(54)) - Registering BlockManagerMaster
+2020-05-03 15:17:15,731 INFO  [main] storage.BlockManagerMasterEndpoint (Logging.scala:logInfo(54)) - Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+2020-05-03 15:17:15,732 INFO  [main] storage.BlockManagerMasterEndpoint (Logging.scala:logInfo(54)) - BlockManagerMasterEndpoint up
+2020-05-03 15:17:15,737 INFO  [main] storage.DiskBlockManager (Logging.scala:logInfo(54)) - Created local directory at /tmp/blockmgr-b5de9b69-9020-496a-aba1-2ed2d926e8e7
+2020-05-03 15:17:15,749 INFO  [main] memory.MemoryStore (Logging.scala:logInfo(54)) - MemoryStore started with capacity 413.9 MB
+2020-05-03 15:17:15,759 INFO  [main] spark.SparkEnv (Logging.scala:logInfo(54)) - Registering OutputCommitCoordinator
+2020-05-03 15:17:15,808 INFO  [main] util.log (Log.java:initialized(192)) - Logging initialized @1300ms
+2020-05-03 15:17:15,848 INFO  [main] server.Server (Server.java:doStart(351)) - jetty-9.3.z-SNAPSHOT, build timestamp: 2018-06-05T17:11:56Z, git hash: 84205aa28f11a4f31f2a3b86d1bba2cc8ab69827
+2020-05-03 15:17:15,860 INFO  [main] server.Server (Server.java:doStart(419)) - Started @1352ms
+2020-05-03 15:17:15,873 INFO  [main] server.AbstractConnector (AbstractConnector.java:doStart(278)) - Started ServerConnector@6aa648b9{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+2020-05-03 15:17:15,873 INFO  [main] util.Utils (Logging.scala:logInfo(54)) - Successfully started service 'SparkUI' on port 4040.
+2020-05-03 15:17:15,890 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@68ace111{/jobs,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,890 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@5d10455d{/jobs/json,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,891 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@535b8c24{/jobs/job,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,891 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@55b62629{/jobs/job/json,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,892 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@a53bb6f{/stages,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,892 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@5e63cad{/stages/json,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,893 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@6759f091{/stages/stage,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,893 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@20921b9b{/stages/stage/json,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,894 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@867ba60{/stages/pool,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,894 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@5ba745bc{/stages/pool/json,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,895 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@654b72c0{/storage,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,895 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@55b5e331{/storage/json,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,896 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@6034e75d{/storage/rdd,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,896 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@15fc442{/storage/rdd/json,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,897 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@3f3c7bdb{/environment,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,897 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@456abb66{/environment/json,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,898 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@2a3a299{/executors,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,898 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@7da10b5b{/executors/json,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,899 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@219f4597{/executors/threadDump,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,899 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@31be6b49{/executors/threadDump/json,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,904 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@2e16b08d{/static,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,904 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@64d43929{/,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,905 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@1d269ed7{/api,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,906 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@2d691f3d{/jobs/job/kill,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,906 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@1bdbf9be{/stages/stage/kill,null,AVAILABLE,@Spark}
+2020-05-03 15:17:15,907 INFO  [main] ui.SparkUI (Logging.scala:logInfo(54)) - Bound SparkUI to 0.0.0.0, and started at http://spark-6bfd5b799c-w28pl:4040
+2020-05-03 15:17:15,918 INFO  [main] spark.SparkContext (Logging.scala:logInfo(54)) - Added JAR file:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar at spark://spark-6bfd5b799c-w28pl:45663/jars/spark-examples_2.11-2.4.5.jar with timestamp 1588519035917
+2020-05-03 15:17:15,918 INFO  [main] spark.SparkContext (Logging.scala:logInfo(54)) - Added JAR file:///opt/spark/examples/jars/scopt_2.11-3.7.0.jar at spark://spark-6bfd5b799c-w28pl:45663/jars/scopt_2.11-3.7.0.jar with timestamp 1588519035918
+2020-05-03 15:17:15,956 INFO  [main] executor.Executor (Logging.scala:logInfo(54)) - Starting executor ID driver on host localhost
+2020-05-03 15:17:15,995 INFO  [main] util.Utils (Logging.scala:logInfo(54)) - Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 33593.
+2020-05-03 15:17:15,995 INFO  [main] netty.NettyBlockTransferService (Logging.scala:logInfo(54)) - Server created on spark-6bfd5b799c-w28pl:33593
+2020-05-03 15:17:15,996 INFO  [main] storage.BlockManager (Logging.scala:logInfo(54)) - Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+2020-05-03 15:17:16,023 INFO  [main] storage.BlockManagerMaster (Logging.scala:logInfo(54)) - Registering BlockManager BlockManagerId(driver, spark-6bfd5b799c-w28pl, 33593, None)
+2020-05-03 15:17:16,025 INFO  [dispatcher-event-loop-0] storage.BlockManagerMasterEndpoint (Logging.scala:logInfo(54)) - Registering block manager spark-6bfd5b799c-w28pl:33593 with 413.9 MB RAM, BlockManagerId(driver, spark-6bfd5b799c-w28pl, 33593, None)
+2020-05-03 15:17:16,027 INFO  [main] storage.BlockManagerMaster (Logging.scala:logInfo(54)) - Registered BlockManager BlockManagerId(driver, spark-6bfd5b799c-w28pl, 33593, None)
+2020-05-03 15:17:16,028 INFO  [main] storage.BlockManager (Logging.scala:logInfo(54)) - Initialized BlockManager: BlockManagerId(driver, spark-6bfd5b799c-w28pl, 33593, None)
+2020-05-03 15:17:16,112 INFO  [main] handler.ContextHandler (ContextHandler.java:doStart(781)) - Started o.s.j.s.ServletContextHandler@7103ab0{/metrics/json,null,AVAILABLE,@Spark}
+2020-05-03 15:17:16,456 INFO  [main] spark.SparkContext (Logging.scala:logInfo(54)) - Starting job: reduce at JavaSparkPi.java:54
+2020-05-03 15:17:16,471 INFO  [dag-scheduler-event-loop] scheduler.DAGScheduler (Logging.scala:logInfo(54)) - Got job 0 (reduce at JavaSparkPi.java:54) with 10 output partitions
+2020-05-03 15:17:16,471 INFO  [dag-scheduler-event-loop] scheduler.DAGScheduler (Logging.scala:logInfo(54)) - Final stage: ResultStage 0 (reduce at JavaSparkPi.java:54)
+2020-05-03 15:17:16,471 INFO  [dag-scheduler-event-loop] scheduler.DAGScheduler (Logging.scala:logInfo(54)) - Parents of final stage: List()
+2020-05-03 15:17:16,472 INFO  [dag-scheduler-event-loop] scheduler.DAGScheduler (Logging.scala:logInfo(54)) - Missing parents: List()
+2020-05-03 15:17:16,476 INFO  [dag-scheduler-event-loop] scheduler.DAGScheduler (Logging.scala:logInfo(54)) - Submitting ResultStage 0 (MapPartitionsRDD[1] at map at JavaSparkPi.java:50), which has no missing parents
+2020-05-03 15:17:16,533 INFO  [dag-scheduler-event-loop] memory.MemoryStore (Logging.scala:logInfo(54)) - Block broadcast_0 stored as values in memory (estimated size 3.3 KB, free 413.9 MB)
+2020-05-03 15:17:16,551 INFO  [dag-scheduler-event-loop] memory.MemoryStore (Logging.scala:logInfo(54)) - Block broadcast_0_piece0 stored as bytes in memory (estimated size 1986.0 B, free 413.9 MB)
+2020-05-03 15:17:16,553 INFO  [dispatcher-event-loop-0] storage.BlockManagerInfo (Logging.scala:logInfo(54)) - Added broadcast_0_piece0 in memory on spark-6bfd5b799c-w28pl:33593 (size: 1986.0 B, free: 413.9 MB)
+2020-05-03 15:17:16,555 INFO  [dag-scheduler-event-loop] spark.SparkContext (Logging.scala:logInfo(54)) - Created broadcast 0 from broadcast at DAGScheduler.scala:1163
+2020-05-03 15:17:16,568 INFO  [dag-scheduler-event-loop] scheduler.DAGScheduler (Logging.scala:logInfo(54)) - Submitting 10 missing tasks from ResultStage 0 (MapPartitionsRDD[1] at map at JavaSparkPi.java:50) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9))
+2020-05-03 15:17:16,568 INFO  [dag-scheduler-event-loop] scheduler.TaskSchedulerImpl (Logging.scala:logInfo(54)) - Adding task set 0.0 with 10 tasks
+2020-05-03 15:17:16,660 WARN  [dispatcher-event-loop-1] scheduler.TaskSetManager (Logging.scala:logWarning(66)) - Stage 0 contains a task of very large size (984 KB). The maximum recommended task size is 100 KB.
+2020-05-03 15:17:16,661 INFO  [dispatcher-event-loop-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Starting task 0.0 in stage 0.0 (TID 0, localhost, executor driver, partition 0, PROCESS_LOCAL, 1007863 bytes)
+2020-05-03 15:17:16,667 INFO  [Executor task launch worker for task 0] executor.Executor (Logging.scala:logInfo(54)) - Running task 0.0 in stage 0.0 (TID 0)
+2020-05-03 15:17:16,670 INFO  [Executor task launch worker for task 0] executor.Executor (Logging.scala:logInfo(54)) - Fetching spark://spark-6bfd5b799c-w28pl:45663/jars/spark-examples_2.11-2.4.5.jar with timestamp 1588519035917
+2020-05-03 15:17:16,706 INFO  [Executor task launch worker for task 0] client.TransportClientFactory (TransportClientFactory.java:createClient(267)) - Successfully created connection to spark-6bfd5b799c-w28pl/10.42.0.226:45663 after 20 ms (0 ms spent in bootstraps)
+2020-05-03 15:17:16,710 INFO  [Executor task launch worker for task 0] util.Utils (Logging.scala:logInfo(54)) - Fetching spark://spark-6bfd5b799c-w28pl:45663/jars/spark-examples_2.11-2.4.5.jar to /tmp/spark-0e7309b9-3682-4de4-a31c-21c3f4656f31/userFiles-f5cb1105-8d87-4ff3-828e-715820f4e6c3/fetchFileTemp961259844185482257.tmp
+2020-05-03 15:17:16,747 INFO  [Executor task launch worker for task 0] executor.Executor (Logging.scala:logInfo(54)) - Adding file:/tmp/spark-0e7309b9-3682-4de4-a31c-21c3f4656f31/userFiles-f5cb1105-8d87-4ff3-828e-715820f4e6c3/spark-examples_2.11-2.4.5.jar to class loader
+2020-05-03 15:17:16,747 INFO  [Executor task launch worker for task 0] executor.Executor (Logging.scala:logInfo(54)) - Fetching spark://spark-6bfd5b799c-w28pl:45663/jars/scopt_2.11-3.7.0.jar with timestamp 1588519035918
+2020-05-03 15:17:16,747 INFO  [Executor task launch worker for task 0] util.Utils (Logging.scala:logInfo(54)) - Fetching spark://spark-6bfd5b799c-w28pl:45663/jars/scopt_2.11-3.7.0.jar to /tmp/spark-0e7309b9-3682-4de4-a31c-21c3f4656f31/userFiles-f5cb1105-8d87-4ff3-828e-715820f4e6c3/fetchFileTemp246258863659766644.tmp
+2020-05-03 15:17:16,751 INFO  [Executor task launch worker for task 0] executor.Executor (Logging.scala:logInfo(54)) - Adding file:/tmp/spark-0e7309b9-3682-4de4-a31c-21c3f4656f31/userFiles-f5cb1105-8d87-4ff3-828e-715820f4e6c3/scopt_2.11-3.7.0.jar to class loader
+2020-05-03 15:17:16,844 INFO  [Executor task launch worker for task 0] executor.Executor (Logging.scala:logInfo(54)) - Finished task 0.0 in stage 0.0 (TID 0). 867 bytes result sent to driver
+2020-05-03 15:17:16,923 INFO  [dispatcher-event-loop-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Starting task 1.0 in stage 0.0 (TID 1, localhost, executor driver, partition 1, PROCESS_LOCAL, 1007868 bytes)
+2020-05-03 15:17:16,923 INFO  [Executor task launch worker for task 1] executor.Executor (Logging.scala:logInfo(54)) - Running task 1.0 in stage 0.0 (TID 1)
+2020-05-03 15:17:16,926 INFO  [task-result-getter-0] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Finished task 0.0 in stage 0.0 (TID 0) in 338 ms on localhost (executor driver) (1/10)
+2020-05-03 15:17:16,972 INFO  [Executor task launch worker for task 1] executor.Executor (Logging.scala:logInfo(54)) - Finished task 1.0 in stage 0.0 (TID 1). 824 bytes result sent to driver
+2020-05-03 15:17:17,024 INFO  [dispatcher-event-loop-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Starting task 2.0 in stage 0.0 (TID 2, localhost, executor driver, partition 2, PROCESS_LOCAL, 1007868 bytes)
+2020-05-03 15:17:17,025 INFO  [Executor task launch worker for task 2] executor.Executor (Logging.scala:logInfo(54)) - Running task 2.0 in stage 0.0 (TID 2)
+2020-05-03 15:17:17,025 INFO  [task-result-getter-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Finished task 1.0 in stage 0.0 (TID 1) in 180 ms on localhost (executor driver) (2/10)
+2020-05-03 15:17:17,066 INFO  [Executor task launch worker for task 2] executor.Executor (Logging.scala:logInfo(54)) - Finished task 2.0 in stage 0.0 (TID 2). 824 bytes result sent to driver
+2020-05-03 15:17:17,106 INFO  [dispatcher-event-loop-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Starting task 3.0 in stage 0.0 (TID 3, localhost, executor driver, partition 3, PROCESS_LOCAL, 1007868 bytes)
+2020-05-03 15:17:17,106 INFO  [Executor task launch worker for task 3] executor.Executor (Logging.scala:logInfo(54)) - Running task 3.0 in stage 0.0 (TID 3)
+2020-05-03 15:17:17,107 INFO  [task-result-getter-2] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Finished task 2.0 in stage 0.0 (TID 2) in 134 ms on localhost (executor driver) (3/10)
+2020-05-03 15:17:17,155 INFO  [Executor task launch worker for task 3] executor.Executor (Logging.scala:logInfo(54)) - Finished task 3.0 in stage 0.0 (TID 3). 867 bytes result sent to driver
+2020-05-03 15:17:17,187 INFO  [dispatcher-event-loop-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Starting task 4.0 in stage 0.0 (TID 4, localhost, executor driver, partition 4, PROCESS_LOCAL, 1007868 bytes)
+2020-05-03 15:17:17,188 INFO  [Executor task launch worker for task 4] executor.Executor (Logging.scala:logInfo(54)) - Running task 4.0 in stage 0.0 (TID 4)
+2020-05-03 15:17:17,188 INFO  [task-result-getter-3] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Finished task 3.0 in stage 0.0 (TID 3) in 121 ms on localhost (executor driver) (4/10)
+2020-05-03 15:17:17,228 INFO  [Executor task launch worker for task 4] executor.Executor (Logging.scala:logInfo(54)) - Finished task 4.0 in stage 0.0 (TID 4). 824 bytes result sent to driver
+2020-05-03 15:17:17,259 INFO  [dispatcher-event-loop-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Starting task 5.0 in stage 0.0 (TID 5, localhost, executor driver, partition 5, PROCESS_LOCAL, 1007868 bytes)
+2020-05-03 15:17:17,260 INFO  [Executor task launch worker for task 5] executor.Executor (Logging.scala:logInfo(54)) - Running task 5.0 in stage 0.0 (TID 5)
+2020-05-03 15:17:17,260 INFO  [task-result-getter-0] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Finished task 4.0 in stage 0.0 (TID 4) in 104 ms on localhost (executor driver) (5/10)
+2020-05-03 15:17:17,292 INFO  [Executor task launch worker for task 5] executor.Executor (Logging.scala:logInfo(54)) - Finished task 5.0 in stage 0.0 (TID 5). 824 bytes result sent to driver
+2020-05-03 15:17:17,329 INFO  [dispatcher-event-loop-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Starting task 6.0 in stage 0.0 (TID 6, localhost, executor driver, partition 6, PROCESS_LOCAL, 1007868 bytes)
+2020-05-03 15:17:17,330 INFO  [Executor task launch worker for task 6] executor.Executor (Logging.scala:logInfo(54)) - Running task 6.0 in stage 0.0 (TID 6)
+2020-05-03 15:17:17,330 INFO  [task-result-getter-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Finished task 5.0 in stage 0.0 (TID 5) in 102 ms on localhost (executor driver) (6/10)
+2020-05-03 15:17:17,355 INFO  [Executor task launch worker for task 6] executor.Executor (Logging.scala:logInfo(54)) - Finished task 6.0 in stage 0.0 (TID 6). 824 bytes result sent to driver
+2020-05-03 15:17:17,385 INFO  [dispatcher-event-loop-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Starting task 7.0 in stage 0.0 (TID 7, localhost, executor driver, partition 7, PROCESS_LOCAL, 1007868 bytes)
+2020-05-03 15:17:17,385 INFO  [Executor task launch worker for task 7] executor.Executor (Logging.scala:logInfo(54)) - Running task 7.0 in stage 0.0 (TID 7)
+2020-05-03 15:17:17,385 INFO  [task-result-getter-2] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Finished task 6.0 in stage 0.0 (TID 6) in 92 ms on localhost (executor driver) (7/10)
+2020-05-03 15:17:17,412 INFO  [Executor task launch worker for task 7] executor.Executor (Logging.scala:logInfo(54)) - Finished task 7.0 in stage 0.0 (TID 7). 824 bytes result sent to driver
+2020-05-03 15:17:17,441 INFO  [dispatcher-event-loop-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Starting task 8.0 in stage 0.0 (TID 8, localhost, executor driver, partition 8, PROCESS_LOCAL, 1007868 bytes)
+2020-05-03 15:17:17,442 INFO  [Executor task launch worker for task 8] executor.Executor (Logging.scala:logInfo(54)) - Running task 8.0 in stage 0.0 (TID 8)
+2020-05-03 15:17:17,442 INFO  [task-result-getter-3] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Finished task 7.0 in stage 0.0 (TID 7) in 87 ms on localhost (executor driver) (8/10)
+2020-05-03 15:17:17,476 INFO  [Executor task launch worker for task 8] executor.Executor (Logging.scala:logInfo(54)) - Finished task 8.0 in stage 0.0 (TID 8). 867 bytes result sent to driver
+2020-05-03 15:17:17,515 INFO  [dispatcher-event-loop-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Starting task 9.0 in stage 0.0 (TID 9, localhost, executor driver, partition 9, PROCESS_LOCAL, 1007868 bytes)
+2020-05-03 15:17:17,515 INFO  [Executor task launch worker for task 9] executor.Executor (Logging.scala:logInfo(54)) - Running task 9.0 in stage 0.0 (TID 9)
+2020-05-03 15:17:17,515 INFO  [task-result-getter-0] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Finished task 8.0 in stage 0.0 (TID 8) in 102 ms on localhost (executor driver) (9/10)
+2020-05-03 15:17:17,544 INFO  [Executor task launch worker for task 9] executor.Executor (Logging.scala:logInfo(54)) - Finished task 9.0 in stage 0.0 (TID 9). 824 bytes result sent to driver
+2020-05-03 15:17:17,547 INFO  [task-result-getter-1] scheduler.TaskSetManager (Logging.scala:logInfo(54)) - Finished task 9.0 in stage 0.0 (TID 9) in 71 ms on localhost (executor driver) (10/10)
+2020-05-03 15:17:17,549 INFO  [task-result-getter-1] scheduler.TaskSchedulerImpl (Logging.scala:logInfo(54)) - Removed TaskSet 0.0, whose tasks have all completed, from pool 
+2020-05-03 15:17:17,549 INFO  [dag-scheduler-event-loop] scheduler.DAGScheduler (Logging.scala:logInfo(54)) - ResultStage 0 (reduce at JavaSparkPi.java:54) finished in 1.060 s
+2020-05-03 15:17:17,554 INFO  [main] scheduler.DAGScheduler (Logging.scala:logInfo(54)) - Job 0 finished: reduce at JavaSparkPi.java:54, took 1.097163 s
+Pi is roughly 3.14038
+2020-05-03 15:17:17,560 INFO  [main] server.AbstractConnector (AbstractConnector.java:doStop(318)) - Stopped Spark@6aa648b9{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+2020-05-03 15:17:17,562 INFO  [main] ui.SparkUI (Logging.scala:logInfo(54)) - Stopped Spark web UI at http://spark-6bfd5b799c-w28pl:4040
+2020-05-03 15:17:17,570 INFO  [dispatcher-event-loop-0] spark.MapOutputTrackerMasterEndpoint (Logging.scala:logInfo(54)) - MapOutputTrackerMasterEndpoint stopped!
+2020-05-03 15:17:17,577 INFO  [main] memory.MemoryStore (Logging.scala:logInfo(54)) - MemoryStore cleared
+2020-05-03 15:17:17,578 INFO  [main] storage.BlockManager (Logging.scala:logInfo(54)) - BlockManager stopped
+2020-05-03 15:17:17,582 INFO  [main] storage.BlockManagerMaster (Logging.scala:logInfo(54)) - BlockManagerMaster stopped
+2020-05-03 15:17:17,584 INFO  [dispatcher-event-loop-0] scheduler.OutputCommitCoordinator$OutputCommitCoordinatorEndpoint (Logging.scala:logInfo(54)) - OutputCommitCoordinator stopped!
+2020-05-03 15:17:17,588 INFO  [main] spark.SparkContext (Logging.scala:logInfo(54)) - Successfully stopped SparkContext
+2020-05-03 15:17:17,591 INFO  [shutdown-hook-0] util.ShutdownHookManager (Logging.scala:logInfo(54)) - Shutdown hook called
+2020-05-03 15:17:17,592 INFO  [shutdown-hook-0] util.ShutdownHookManager (Logging.scala:logInfo(54)) - Deleting directory /tmp/spark-0e7309b9-3682-4de4-a31c-21c3f4656f31
+2020-05-03 15:17:17,594 INFO  [shutdown-hook-0] util.ShutdownHookManager (Logging.scala:logInfo(54)) - Deleting directory /tmp/spark-30fd1e75-96e5-4551-b6c7-8d3b23863d71</msg>
+<status status="PASS" starttime="20200503 15:17:17.963" endtime="20200503 15:17:17.963"></status>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<arguments>
+<arg>${rc}</arg>
+<arg>0</arg>
+</arguments>
+<msg timestamp="20200503 15:17:17.964" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200503 15:17:17.964" endtime="20200503 15:17:17.964"></status>
+</kw>
+<msg timestamp="20200503 15:17:17.964" level="INFO">${output} = 2020-05-03 15:17:15,265 WARN  [main] util.NativeCodeLoader (NativeCodeLoader.java:&lt;clinit&gt;(60)) - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+...</msg>
+<status status="PASS" starttime="20200503 15:17:14.343" endtime="20200503 15:17:17.964"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>3.14</arg>
+</arguments>
+<status status="PASS" starttime="20200503 15:17:17.965" endtime="20200503 15:17:17.965"></status>
+</kw>
+<status status="PASS" starttime="20200503 15:17:14.292" endtime="20200503 15:17:17.965" critical="yes"></status>
+</test>
+<doc>Smoketest Spark execution</doc>
+<status status="PASS" starttime="20200503 15:17:14.261" endtime="20200503 15:17:17.966"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="Spark">Spark</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
