@@ -1,0 +1,8 @@
+name: spark-hadoop2
+basetag: 34
+urlpath: spark/spark-%s/spark-%s-bin-hadoop2.7.tgz
+containers:
+   - flokkr/spark-hadoop2
+git: https://github.com/flokkr/docker-spark
+versions:
+  - 2.4.6
