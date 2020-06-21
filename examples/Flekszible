@@ -2,10 +2,9 @@ source:
 - path: ..
 - url: github.com/flokkr/docker-hadoop
 import:
-- path: util
+- path: testutil
 - path: hadoop
 - path: spark
   transformations:
   - type: hadoop/distribute
     image: flokkr/hadoop:3.2.1
-
