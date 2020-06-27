@@ -6,7 +6,7 @@ retry() {
    do
       "$@" && break
       n=$[$n+1]
-      echo "$n '$@' is failed..."
+      echo "Attempt $n: '$@' is failed..."
       sleep 3
    done
 }

@@ -2,7 +2,6 @@ source:
 - path: ..
 - url: github.com/flokkr/docker-hadoop
 import:
-- path: testutil
 - path: hadoop
 - path: spark
   transformations:

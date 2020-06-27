@@ -27,8 +27,6 @@ spec:
         volumeMounts:
         - name: hadoop
           mountPath: /opt/hadoop
-        - name: smoketest
-          mountPath: /opt/smoketest
       initContainers:
       - name: hadoopcopy
         image: flokkr/hadoop:3.2.1
@@ -39,11 +37,6 @@ spec:
         volumeMounts:
         - name: hadoop
           mountPath: /opt/hadoop-dist
-        - name: smoketest
-          mountPath: /opt/smoketest
       volumes:
       - name: hadoop
         emptyDir: {}
-      - name: smoketest
-        hostPath:
-          path: /home/elek/projects/flokkr/docker-spark/examples/smoketest
